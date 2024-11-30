@@ -1,6 +1,16 @@
-const products = [
-    { id: 1, name: "Product A", price: 100 },
-    { id: 2, name: "Product B", price: 150 },
-];
+const mongoose = require("mongoose");
 
-module.exports = products; // Exporting an array or object
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB_URL, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log("MongoDB connected...");
+    } catch (err) {
+        console.error(err.message);
+        process.exit(1);
+    }
+};
+
+module.exports = connectDB;

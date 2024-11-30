@@ -1,29 +1,20 @@
 const express = require("express");
+const morgan = require("morgan");
+const dotenv = require("dotenv");
+const connectDB = require("./data/db");
+
+dotenv.config();
 const app = express();
 
-const dotenv = require("dotenv");
-const products = require("./data/db");
-dotenv.config()
+connectDB();
 
-// test route
-app.get("/api/products", (req, res) =>{
-    // const products = products;
-    res.json(products);
-    // console.log(products);
+app.use(morgan("dev"));
+
+app.get("/products", (req, res) => {
+    res.send("Hello world");
 });
 
-app.get('/api/products/:id', (req, res) => {
-    const productId = parseInt(req.params.id, 10); // Get the product ID from the URL
-    const product = products.find(p => p.id === productId); // Find product by ID
-
-    if (product) {
-        res.status(200).json(product); // Return the product if found
-    } else {
-        res.status(404).json({ message: 'Product not found' }); // Return 404 if not found
-    }
-});
-
-const PORT = process.env.PORT;
-app.listen(PORT, () =>{
-    console.log(`server listening on port ${PORT}`);
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`);
 });
