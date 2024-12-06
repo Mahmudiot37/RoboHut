@@ -4,10 +4,14 @@ import './index.css'
 import App from './App.jsx'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'font-awesome/css/font-awesome.css'
-
+import {BrowserRouter} from 'react-router-dom'
 
 createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
   <StrictMode>
     <App />
-  </StrictMode>,
-)
+  </StrictMode>
+  </BrowserRouter>
+);
+
+
