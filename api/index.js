@@ -3,6 +3,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import connectDB from "./data/db.js";
 import authRoutes from "./routes/authRoutes.js";
+import cors from "cors";
 
 dotenv.config();
 const app = express();
@@ -12,6 +13,7 @@ connectDB();
 // Middleware
 app.use(morgan("dev"));
 app.use(express.json()); // Parse JSON payloads
+app.use(cors());
 
 // Routes
 app.use("/api/v1/auth", authRoutes);
