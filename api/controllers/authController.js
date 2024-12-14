@@ -1,3 +1,4 @@
+// import { use } from "react";
 import userModel from "../models/userModel.js"; // Ensure correct path and extension
 import { comparePassword, hashPassword } from "../utils/hashPass.js"; // Ensure correct path and extension
 import JWT from "jsonwebtoken";
@@ -103,6 +104,44 @@ export const loginController = async (req, res) => {
             message: "Error in login",
             error: error.message || "Unexpected error occurred",
         });
+    }
+};
+
+export const forgotPasswordController = async(req, res) =>{
+    try {
+        const {email, question, newPassword} = req.body;
+        if (!email){
+            res.status(400).send({message: "Email is required"});
+        }
+        if(!question){
+            res.status(400).send({message: "Question is required"});
+        }
+        if(!newPassword){
+            res.status(400).send({message: "New password required"});
+        }
+        // check
+        const user = await userModel.findOne({ email, question});
+        // validation
+        if(!user){
+            return res.status(404).send({
+                success: false,
+                message: "Wrong email"
+            });
+        }
+
+        const hased = await hashedPassword(newPassword);
+        await userModel.findByIdAndUpdate(user._id, {password: hased});
+        res.status(200).send({
+            success: true,
+            message: "Password reset succesfully",
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "Something went wrong",
+            error
+        })
     }
 };
 
