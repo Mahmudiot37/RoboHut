@@ -5,7 +5,13 @@ import { Helmet } from 'react-helmet';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Layout = ({ children, title, description, keywords, author }) => {
+const Layout = ({
+  children,
+  title = 'Ecommerce app - shop now',
+  description = 'mern stack project',
+  keywords = 'mern,react,node,mongodb',
+  author = 'Techinfoyt',
+}) => {
   return (
     <div>
       <Helmet>
@@ -23,13 +29,6 @@ const Layout = ({ children, title, description, keywords, author }) => {
       <Footer />
     </div>
   );
-};
-
-Layout.defaultProps = {
-  title: 'Ecommerce app - shop now',
-  description: 'mern stack project',
-  keywords: 'mern,react,node,mongodb',
-  author: 'Techinfoyt',
 };
 
 export default Layout;

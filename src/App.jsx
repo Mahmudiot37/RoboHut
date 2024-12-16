@@ -13,6 +13,7 @@ import Login from './pages/auth/login.jsx';
 import Dashboard from './pages/user/dashboard.jsx';
 import { GiPrivate } from 'react-icons/gi';
 import PrivateRoute from './components/layout/privateRoute.jsx';
+import CartPage from './components/layout/CartPage.jsx';
 // import { AuthProvider } from './context/auth.jsx';
 
 
@@ -28,6 +29,7 @@ function App() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/policy" element={<Policy />} />
       <Route path="/*" element={<PageNotFound />} />
+      <Route path="/cart" element={<CartPage />} />
     </Routes>
   );
 }
